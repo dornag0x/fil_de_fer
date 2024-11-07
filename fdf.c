@@ -6,11 +6,23 @@
 /*   By: hfeufeu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:42:10 by hfeufeu           #+#    #+#             */
-/*   Updated: 2024/11/06 16:55:14 by hfeufeu          ###   ########.fr       */
+/*   Updated: 2024/11/07 14:01:58 by hfeufeu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "lib/MacroLibX/includes/mlx.h"
-#include "FdF.h"
+#include "fdf.h"
+
+/*int key_hook(int keycode, void *mlx)
+{
+    printf("Key pressed: %d\n", keycode);
+    return (0);
+}*/
+
+int closewin(int key, void *mlx)
+{
+	if (key == 0)
+		mlx_loop_end(mlx);
+	return (0);
+}
 
 int key_escape(int key, void *mlx)
 {
@@ -19,45 +31,38 @@ int key_escape(int key, void *mlx)
 	return (0);
 }
 
-t_square squarepusher()
+t_triangle trianglepusher()
 {
-	t_square abs;
+	t_triangle abs;
 
 	abs.x = 200;
-	abs.j = 150;
-	abs.i = 450;
-	abs.y = 600;
+	abs.y = 400;
+	abs.i = 123;
 	return (abs);
 }
 
-void squarelol(void *mlx, void *win, t_square abs)
+void squarelol(void *mlx, void *win)
 {
 	int	i;
 	int	j;
 
-	i = abs.x;
-	j = abs.j;
-	while (i < abs.y)
+	i = 200;
+	j = 150;
+	while (j < 300)
 	{
-		mlx_pixel_put(mlx, win, i, abs.j, 0xFF404040);
-		i++;
-	}
-	while (j < abs.i)
-	{
-		mlx_pixel_put(mlx, win, abs.x, j, 0xFF404040);
+		mlx_pixel_put(mlx, win, i, j, 0xFF404040);
 		j++;
 	}
-	i = abs.j;
-	while (i < abs.i)
+	while (i < 350)
 	{
-		mlx_pixel_put(mlx, win, abs.y, i, 0xFF404040);
+		mlx_pixel_put(mlx, win, i, j, 0xFF404040);
 		i++;
 	}
-	j = abs.x;
-	while (j < abs.y)
+	while (i > 200)
 	{
-		mlx_pixel_put(mlx, win, j, abs.i, 0xFF404040);
-		j++;
+		mlx_pixel_put(mlx, win, i, j, 0xFF404040);
+		i--;
+		j--;
 	}
 }
 
@@ -65,13 +70,14 @@ int main()
 {
 	void		*mlx;
 	void		*win;
-	t_square	abs;
+	t_triangle	abs;
 
 	mlx = mlx_init();
-	abs = squarepusher();
+	abs = trianglepusher();
 	win = mlx_new_window(mlx, 800, 600, "FilDeFer");
-	squarelol(mlx, win, abs);
-	mlx_on_event(mlx, win, MLX_KEYDOWN, key_escape, mlx);
+	squarelol(mlx, win);
+	mlx_on_event(mlx, win, MLX_KEYDOWN, hooking, mlx);
+	mlx_on_event(mlx, win, MLX_WINDOW_EVENT, closewin, mlx);
 	mlx_loop(mlx);
 
 	mlx_destroy_window(mlx, win);
