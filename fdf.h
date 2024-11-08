@@ -13,6 +13,7 @@
 # define FDF_H
 
 # include <stdio.h>
+# include <math.h>
 # include "lib/MacroLibX/includes/mlx.h"
 
 typedef struct s_triangle

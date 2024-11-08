@@ -70,10 +70,8 @@ int main()
 {
 	void		*mlx;
 	void		*win;
-	t_triangle	abs;
 
 	mlx = mlx_init();
-	abs = trianglepusher();
 	win = mlx_new_window(mlx, 800, 600, "FilDeFer");
 	squarelol(mlx, win);
 	mlx_on_event(mlx, win, MLX_KEYDOWN, hooking, mlx);

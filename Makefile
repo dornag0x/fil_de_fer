@@ -27,12 +27,15 @@ YELLOW = \033[33m
 RESET = \033[0m
 
 define HEADER
-___________              __
-\__    ___/___   _______/  |_
-  |    |_/ __ \ /  ___/\   __\\
-  |    |\  ___/ \___ \  |  |
-  |____| \___  >____  > |__|
-             \/     \/
+$(RED) ███████████ ██████████   ███████████$(RESET)
+$(RED)░░███░░░░░░█░░███░░░░███ ░░███░░░░░░█$(RESET)
+$(RED) ░███   █ ░  ░███   ░░███ ░███   █ ░$(RESET)
+$(RED) ░███████    ░███    ░███ ░███████  $(RESET)
+$(RED) ░███░░░█    ░███    ░███ ░███░░░█  $(RESET)
+$(RED) ░███  ░     ░███    ███  ░███  ░   $(RESET)
+$(RED) █████       ██████████   █████     $(RESET)
+$(RED)░░░░░       ░░░░░░░░░░   ░░░░░$(RESET)
+$(RED)By Dornagol$(RESET)
 endef
 export HEADER
 
@@ -43,7 +46,7 @@ header:
 	@echo -e "$$HEADER"
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo -e "$(YELLOW)[Compiling] $< -> $@$(RESET)"
 
 $(EXEC): $(OBJ)
@@ -51,7 +54,6 @@ $(EXEC): $(OBJ)
 	@$(CC) $(OBJ) $(LIB) $(LIBS) -o $(EXEC)
 	@echo -e "$(GREEN)[Executable generated] You can run it with './$(EXEC)'$(RESET)"
 
-# Nouvelle règle pour compiler sans les options de warning
 test: CFLAGS =
 test: clean header $(EXEC)
 	@echo -e "$(GREEN)[Test Compilation] Executable $(EXEC) ready to use without warning flags$(RESET)"
