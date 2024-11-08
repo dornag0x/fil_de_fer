@@ -31,39 +31,27 @@ int key_escape(int key, void *mlx)
 	return (0);
 }
 
-t_triangle trianglepusher()
+t_abs pusher()
 {
-	t_triangle abs;
+	t_abs oui;
 
-	abs.x = 200;
-	abs.y = 400;
-	abs.i = 123;
-	return (abs);
+	oui.x = 
+	oui.y = 
+	oui.z = 
 }
 
 void squarelol(void *mlx, void *win)
 {
-	int	i;
-	int	j;
+	t_abs	src;
+	t_abs	dst;
 
-	i = 200;
-	j = 150;
-	while (j < 300)
-	{
-		mlx_pixel_put(mlx, win, i, j, 0xFF404040);
-		j++;
-	}
-	while (i < 350)
-	{
-		mlx_pixel_put(mlx, win, i, j, 0xFF404040);
-		i++;
-	}
-	while (i > 200)
-	{
-		mlx_pixel_put(mlx, win, i, j, 0xFF404040);
-		i--;
-		j--;
-	}
+	dst.x = src.x * cos(a)
+		+ src.y * cos(a + 2)
+		+ src.z * cos(a - 2);
+	dst.y = src.x * sin(a)
+		+ src.y * sin(a + 2)
+		+ src.z * sin(a - 2);
+	mls_pixel_put(mlx, win, )
 }
 
 int main()

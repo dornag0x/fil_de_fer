@@ -16,12 +16,12 @@
 # include <math.h>
 # include "lib/MacroLibX/includes/mlx.h"
 
-typedef struct s_triangle
+typedef struct s_abs
 {
-	int	x;
-	int	y;
-	int	i;
-}	t_triangle;
+	float	x;
+	float	y;
+	float	z
+}	t_abs;
 
 int	hooking(int key, void *mlx);
 #endif
