@@ -6,7 +6,7 @@
 #    By: hfeufeu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 20:28:29 by hfeufeu           #+#    #+#              #
-#    Updated: 2024/11/07 20:48:40 by hfeufeu          ###   ########.fr        #
+#    Updated: 2024/11/08 16:53:59 by hfeufeu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 CC = gcc
@@ -18,6 +18,7 @@ LIBS = -lSDL2
 
 SRC = fdf.c \
 	  hooks.c \
+	  points.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -43,7 +44,7 @@ all: header $(EXEC)
 
 header:
 	clear
-	@echo -e "$$HEADER"
+	@echo  "$$HEADER"
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
