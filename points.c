@@ -11,40 +11,33 @@
 /* ************************************************************************** */
 #include "fdf.h"
 
-t_abs	*pusher()
+void	pusher(void *mlx, void *win)
 {
-	struct s_abs baguette[4] = {
+	int	i;
+
+	i = 0;
+//	(WINDOW_WIDTH / 2) + PIXEL
+	struct s_abs base[4] = {
 		{200, 150, 0},
-		{0, 0, 1},
-		{1, 0, 1},
-		{1, 1, 0}};
-	return (baguette);
-	starting_point = ((WINDOW_WIDTH / 2) + )
-	/*pos = malloc(sizeof(t_abs) * 4);
-	if (!pos)
-		return (NULL);
-	pos[4] = {
-		{200, 150, 0},
-		{0, 0, 1},
-		{1, 0, 1},
-		{1, 1, 0}};*/
+		{0, 0, 0},
+		{0, 0, 0},
+		{0, 0, 0}
+	};
+	squarelol(mlx, win, base[0]);
 }
 
-void	squarelol(void *mlx, void *win)
+void	squarelol(void *mlx, void *win, struct s_abs src)
 {
-	struct s_abs	*src;
 	t_abs	dst;
 
-	src = malloc(sizeof(t_abs) * 4);
-	if (!src)
-		return ;
-	/*dst.x = src.x * cos(a)
-		+ src.y * cos(a + 2)
-		+ src.z * cos(a - 2);
-	dst.y = src.x * sin(a)
-		+ src.y * sin(a + 2)
-		+ src.z * sin(a - 2);*/
-	dst.x = (src->x - src->z) / sqrt(2);
-	dst.y = (src->x + (2 * src->y) + src->z) / sqrt(6);
-	mlx_pixel_put(mlx, win, dst.x, dst.y, 0xFF404040);
+	dst.x = (src.x - src.z) / sqrt(2);
+	dst.y = (src.x + (2 * src.y) + src.z) / sqrt(6);
+	mlx_pixel_put(mlx, win, dst.x, dst.y, 0xFFFFFFFF);
 }
+
+/*int	matrix()
+{
+	matrix[0] = matrix[0] + matrix[0][1] + matrix
+	matrix[1] = 
+	matrix[2] = 
+}*/

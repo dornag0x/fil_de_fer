@@ -13,12 +13,13 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 EXEC = fdf
-LIB = lib/MacroLibX/libmlx.so
+LIB = lib/MacroLibX/libmlx.so lib/libft/libft.a
 LIBS = -lSDL2
 
 SRC = fdf.c \
 	  hooks.c \
 	  points.c \
+	  parsing.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -48,34 +49,34 @@ header:
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo -e "$(YELLOW)[Compiling] $< -> $@$(RESET)"
+	@echo "$(YELLOW)[Compiling] $< -> $@$(RESET)"
 
 $(EXEC): $(OBJ)
-	@echo -e "$(GREEN)[Linking] Creating executable $(EXEC)...$(RESET)"
+	@echo "$(GREEN)[Linking] Creating executable $(EXEC)...$(RESET)"
 	@$(CC) $(OBJ) $(LIB) $(LIBS) -o $(EXEC)
-	@echo -e "$(GREEN)[Executable generated] You can run it with './$(EXEC)'$(RESET)"
+	@echo "$(GREEN)[Executable generated] You can run it with './$(EXEC)'$(RESET)"
 
 test: CFLAGS =
 test: clean header $(EXEC)
-	@echo -e "$(GREEN)[Test Compilation] Executable $(EXEC) ready to use without warning flags$(RESET)"
+	@echo "$(GREEN)[Test Compilation] Executable $(EXEC) ready to use without warning flags$(RESET)"
 
 clean:
-	@echo -e "$(RED)[Cleaning] Removing object files...$(RESET)"
+	@echo "$(RED)[Cleaning] Removing object files...$(RESET)"
 	@rm -f $(OBJ)
 
 fclean: clean
-	@echo -e "$(RED)[Full cleanup] Removing executable...$(RESET)"
+	@echo "$(RED)[Full cleanup] Removing executable...$(RESET)"
 	@rm -f $(EXEC)
 
 re: fclean all
-	@echo -e "$(GREEN)[Rebuilding] Everything is recompiled!$(RESET)"
+	@echo "$(GREEN)[Rebuilding] Everything is recompiled!$(RESET)"
 
 info:
-	@echo -e "$(GREEN)[Info]	       Executable is named $(EXEC)"
-	@echo -e "$(GREEN)[Source files] $(SRC)"
-	@echo -e "$(GREEN)[Object files] $(OBJ)"
-	@echo -e "$(GREEN)[Libraries]    $(LIB) $(LIBS)"
-	@echo -e "$(GREEN)[Executable]   ./$(EXEC)$(RESET)"
+	@echo "$(GREEN)[Info]	       Executable is named $(EXEC)"
+	@echo "$(GREEN)[Source files] $(SRC)"
+	@echo "$(GREEN)[Object files] $(OBJ)"
+	@echo "$(GREEN)[Libraries]    $(LIB) $(LIBS)"
+	@echo "$(GREEN)[Executable]   ./$(EXEC)$(RESET)"
 
 .PHONY: all clean fclean re info header fast
 

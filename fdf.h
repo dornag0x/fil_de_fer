@@ -16,8 +16,13 @@
 # include <math.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+
 
 # include "lib/MacroLibX/includes/mlx.h"
+# include "lib/libft/libft.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 6500
@@ -27,19 +32,21 @@
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
 
-typedef struct s_list
-{
-	char c
-}	t_list;
-
 typedef struct s_abs
 {
-	int	x;
-	int	y;
-	int	z;
+	double	x;
+	double	y;
+	double	z;
 }	t_abs;
 
-struct s_abs	*pusher();
-void	squarelol(void *mlx, void *win);
+typedef struct s_char
+{
+	char			c;
+	struct s_char	*next;
+}	t_char;
+
+int		parse(void *mlx, void *win, char *file_name);
+void	squarelol(void *mlx, void *win, struct s_abs src);
+void	pusher(void *mlx, void *win);
 int		hooking(int key, void *mlx);
 #endif
