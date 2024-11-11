@@ -18,17 +18,17 @@ void	pusher(void *mlx, void *win)
 
 	i = 0;
 	L = 50;
-	struct s_abs base[4] = {
-	    //{L/2, L/2, L/2},
-        //{L/2, L/2, -L/2},
-        //{L/2, -L/2, L/2},
-        //{-L/2, L/2, L/2},
+	struct s_abs base[8] = {
+	    {L/2, L/2, L/2},
+		{L/2, L/2, -L/2},
+        {L/2, -L/2, L/2},
+        {-L/2, L/2, L/2},
         {L/2, -L/2, -L/2},
         {-L/2, L/2, -L/2},
         {-L/2, -L/2, L/2},
         {-L/2, -L/2, -L/2}
 	};
-	while (i < 4)
+	while (i < 8)
 	{
 		squarelol(mlx, win, base[i]);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: hfeufeu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:30:00 by hfeufeu           #+#    #+#             */
-/*   Updated: 2024/11/09 00:52:38 by hfeufeu          ###   ########.fr       */
+/*   Updated: 2024/11/11 22:47:36 by hfeufeu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef FDF_H
@@ -33,6 +33,12 @@
 # define WINDOW_HEIGHT 480
 # define MOVE_STEP 10
 
+typedef struct s_buffer
+{
+	struct s_buffer	*next;
+	char			buff[BUFFER_SIZE + 1];
+} t_buffer;
+
 typedef struct s_abs
 {
 	double	x;
@@ -40,14 +46,12 @@ typedef struct s_abs
 	double	z;
 }	t_abs;
 
-typedef struct s_char
-{
-	char			c;
-	struct s_char	*next;
-}	t_char;
-
-void	squarelol(void *mlx, void *win, struct s_abs src);
-int		parse(void *mlx, void *win, char *file_name);
-void	pusher(void *mlx, void *win);
-int		hooking(int key, void *mlx);
+int			ft_lstsizec(t_buffer *lst);
+t_buffer	*ft_lstlastc(t_buffer *lst);
+t_buffer	*ft_lstnewc(char *content);
+void		ft_lstadd_backc(t_buffer **lst, t_buffer *new);
+void		squarelol(void *mlx, void *win, struct s_abs src);
+int			parse(char *file_name);
+void		pusher(void *mlx, void *win);
+int			hooking(int key, void *mlx);
 #endif
