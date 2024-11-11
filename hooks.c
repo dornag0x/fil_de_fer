@@ -13,7 +13,7 @@
 
 int	mv_up(int key, void *mlx)
 {
-	printf("oui");
+
 	return (0);
 }
 
@@ -24,7 +24,7 @@ int	mv_right(int key, void *mlx)
 	px = 0;
 	if (key == 79)
 		px = 2;
-	return (px);
+	return (0);
 }
 
 int	mv_down(int key, void *mlx)
@@ -49,8 +49,10 @@ int	mv_left(int key, void *mlx)
 
 int	hooking(int key, void *mlx)
 {
+	if (key == 40)
+		printf("hugo");
 	if (key == 82)
-		mv_up(key, mlx);
+		return (2);
 	if (key == 41)
 		mlx_loop_end(mlx);
 	//if (key == 79)
@@ -58,3 +60,20 @@ int	hooking(int key, void *mlx)
 	//if (key == 80)
 	return (0);
 }
+
+/*int hooking(int keycode, t_abs *src) {
+    if (keycode == 82) {
+        src->y -= MOVE_STEP;
+		printf("asdasd");
+    }
+   /* else if (keycode == MLX_KEY_DOWN) {
+        src->y += MOVE_STEP;  // Déplacer vers le bas
+    }
+    else if (keycode == MLX_KEY_LEFT) {
+        src->x -= MOVE_STEP;  // Déplacer vers la gauche
+    }
+    else if (keycode == MLX_KEY_RIGHT) {
+        src->x += MOVE_STEP;  // Déplacer vers la droite
+    }
+    return 0;
+}*/

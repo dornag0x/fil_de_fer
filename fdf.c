@@ -24,13 +24,6 @@ int closewin(int key, void *mlx)
 	return (0);
 }
 
-int key_escape(int key, void *mlx)
-{
-	if (key == 41)
-		mlx_loop_end(mlx);
-	return (0);
-}
-
 int main(int argc, char **argv)
 {
 	void		*mlx;
@@ -39,8 +32,6 @@ int main(int argc, char **argv)
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "FDF");
 	pusher(mlx, win);
-	parse(mlx, win, argv[1]);
-	mlx_on_event(mlx, win, MLX_KEYDOWN, hooking, mlx);
 	mlx_on_event(mlx, win, MLX_WINDOW_EVENT, closewin, mlx);
 	mlx_loop(mlx);
 

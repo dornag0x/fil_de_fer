@@ -13,26 +13,36 @@
 
 void	pusher(void *mlx, void *win)
 {
-	int	i;
+	int		i;
+	float	L;
 
 	i = 0;
-//	(WINDOW_WIDTH / 2) + PIXEL
+	L = 50;
 	struct s_abs base[4] = {
-		{200, 150, 0},
-		{0, 0, 0},
-		{0, 0, 0},
-		{0, 0, 0}
+	    //{L/2, L/2, L/2},
+        //{L/2, L/2, -L/2},
+        //{L/2, -L/2, L/2},
+        //{-L/2, L/2, L/2},
+        {L/2, -L/2, -L/2},
+        {-L/2, L/2, -L/2},
+        {-L/2, -L/2, L/2},
+        {-L/2, -L/2, -L/2}
 	};
-	squarelol(mlx, win, base[0]);
+	while (i < 4)
+	{
+		squarelol(mlx, win, base[i]);
+		i++;
+	}
 }
 
 void	squarelol(void *mlx, void *win, struct s_abs src)
 {
 	t_abs	dst;
 
+	mlx_on_event(mlx, win, MLX_KEYDOWN, hooking, mlx);
 	dst.x = (src.x - src.z) / sqrt(2);
 	dst.y = (src.x + (2 * src.y) + src.z) / sqrt(6);
-	mlx_pixel_put(mlx, win, dst.x, dst.y, 0xFFFFFFFF);
+	mlx_pixel_put(mlx, win, (int)(dst.x + (WINDOW_WIDTH / 2)), (int)(dst.y + (WINDOW_HEIGHT / 2)), 0xFFFFFFFF);
 }
 
 /*int	matrix()

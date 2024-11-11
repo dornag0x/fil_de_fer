@@ -29,8 +29,9 @@
 # endif
 
 # define PIXEL 3
-# define WINDOW_WIDTH 1920
-# define WINDOW_HEIGHT 1080
+# define WINDOW_WIDTH 640
+# define WINDOW_HEIGHT 480
+# define MOVE_STEP 10
 
 typedef struct s_abs
 {
@@ -45,8 +46,8 @@ typedef struct s_char
 	struct s_char	*next;
 }	t_char;
 
-int		parse(void *mlx, void *win, char *file_name);
 void	squarelol(void *mlx, void *win, struct s_abs src);
+int		parse(void *mlx, void *win, char *file_name);
 void	pusher(void *mlx, void *win);
 int		hooking(int key, void *mlx);
 #endif
