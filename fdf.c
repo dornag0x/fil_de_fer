@@ -6,7 +6,7 @@
 /*   By: hfeufeu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:42:10 by hfeufeu           #+#    #+#             */
-/*   Updated: 2024/11/11 22:52:46 by hfeufeu          ###   ########.fr       */
+/*   Updated: 2024/11/12 23:35:11 by hfeufeu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fdf.h"
@@ -31,11 +31,13 @@ int main(int argc, char **argv)
 
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "FDF");
-	pusher(mlx, win);
-	parse(argv[1]);
+	//pusher(mlx, win);
+	//parse(argv[1]);
+	squarelol(mlx, win);
+	mlx_on_event(mlx, win, MLX_KEYDOWN, hooking, mlx);
 	mlx_on_event(mlx, win, MLX_WINDOW_EVENT, closewin, mlx);
 	mlx_loop(mlx);
 
-	mlx_destroy_window(mlx, win);
+  mlx_destroy_window(mlx, win);
 	mlx_destroy_display(mlx);
 }
