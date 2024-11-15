@@ -49,7 +49,7 @@ header:
 	@echo  "$$HEADER"
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -g -c $< -o $@
 	@echo "$(YELLOW)[Compiling] $< -> $@$(RESET)"
 
 $(EXEC): $(OBJ)

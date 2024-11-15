@@ -11,10 +11,9 @@
 /* ************************************************************************** */
 #include "fdf.h"
 
-/*int	parse(char *file_name)
+int	parse(char *file_name)
 {
 	int			fd;
-	int			i;
 	t_buffer	*head;
 	t_points	data;
 	char		*src;
@@ -26,8 +25,7 @@
 	close(fd);
 	src = buff_to_str(head);
 	data = point_parser(src);
-	printf("%d\n", ft_strlen(src));
-	printf("%s\n", src);
+	printf("%s", src);
 	return (0);
 }
 
@@ -42,7 +40,6 @@ t_buffer	*read_file(int fd)
 	bytes = read(fd, buffer, BUFFER_SIZE);
 	while (bytes > 0)
 	{
-		buffer[bytes] = '\0';
 		new_node = ft_lstnewc(buffer, bytes);
 		if (!new_node)
 			return (NULL);
@@ -56,7 +53,7 @@ t_buffer	*read_file(int fd)
 
 size_t	get_total_size(t_buffer *head)
 {
-	size_t size;
+	size_t	size;
 
 	size = 0;
 	while (head)
@@ -84,42 +81,60 @@ char	*buff_to_str(t_buffer *src)
 		free(prev);
 	}
 	ft_strlcpy(tmp, src->buff, BUFFER_SIZE);
-	free(src);
 	tmp[bigsize] = '\0';
 	return (tmp);
 }
 
-t_points point_parser(char *file)
+t_points	point_parser(char *file)
 {
 	t_points	points;
 	int			i;
-	int			j;
 	int			count;
 	int			elem;
 
 	i = 0;
-	j = 0;
 	count = 0;
 	elem = 0;
 	while (file[i])
 	{
+		while (file[i] >= '0' && file[i] <= '9')
+		{
+			i++;
+			if (!(file[i] >= '0' && file[i] <= '9'))
+				elem++;
+		}
 		if (file[i] == '\n')
 			count++;
-		if (file[i] >= 0 && file[i] <= 9)
-			elem++;
 		i++;
 	}
-	points.rows = count;
-	points.cols = i / count;
-	points.data = (int *)malloc(sizeof(int) * elem);
+	points.cols = count;
+	points.rows = elem / count;
+	points.data = data_push(file, elem);
+	return (points);
+}
+
+int	*data_push(char *file, int elem)
+{
+	int	i;
+	int	j;
+	int	start;
+	int	*tab;
+
 	i = 0;
 	j = 0;
+	tab = (int *)malloc(sizeof(int) * elem);
+	if (!tab)
+		return (0);
 	while (file[i])
 	{
-		if (file[i] >= '0' && file[i] <= '9')
-			points.data[j++] = file[i] - '0';
+		start = i;
+		while (file[i] >= '0' && file[i] <= '9' || file[i] == '-')
+		{
+			i++;
+			if (!(file[i] >= '0' && file[i] <= '9'))
+				tab[j++] = ft_atoi(ft_substrc(file, start, i + 1));
+		}
 		i++;
 	}
-	i = 0;
-	return (points);
-}*/
+	return (tab);
+}

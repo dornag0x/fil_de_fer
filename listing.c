@@ -79,3 +79,28 @@ void	ft_lstclearc(t_buffer **lst, void (*del)(void*))
 	}
 	(*lst) = NULL;
 }
+
+char	*ft_substrc(char const *s, unsigned int start, size_t len)
+{
+	unsigned int	j;
+	char			*des;
+
+	j = 0;
+	if (!s)
+		return (NULL);
+	if ((start + len) > ft_strlen(s))
+		len = (ft_strlen(s) - start);
+	if (start >= ft_strlen(s) || s == NULL)
+		return (ft_strdup(""));
+	des = malloc(sizeof(char) * (len) + 1);
+	if (!des)
+		return (NULL);
+	while (s[start] != '\0' && j < len)
+	{
+		des[j] = s[start];
+		j++;
+		start++;
+	}
+	des[j] = '\0';
+	return (des);
+}

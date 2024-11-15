@@ -32,12 +32,12 @@ int main(int argc, char **argv)
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "FDF");
 	//pusher(mlx, win);
-	//parse(argv[1]);
+	parse(argv[1]);
 	squarelol(mlx, win);
 	mlx_on_event(mlx, win, MLX_KEYDOWN, hooking, mlx);
 	mlx_on_event(mlx, win, MLX_WINDOW_EVENT, closewin, mlx);
 	mlx_loop(mlx);
 
-  mlx_destroy_window(mlx, win);
+	mlx_destroy_window(mlx, win);
 	mlx_destroy_display(mlx);
 }

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "fdf.h"
 
-void	pusher(void *mlx, void *win)
+/*void	pusher(void *mlx, void *win)
 {
 	int		i;
 	int		*row1 = NULL;
@@ -31,15 +31,28 @@ void	pusher(void *mlx, void *win)
 			t_abs[i] = getcoord(points.rows, points.cols, x, y);
 		}
 	}
-}
+}*/
 
-t_vec	squarelol(void *mlx, void *win)
+void	squarelol(void *mlx, void *win)
 {
 	t_vec	dst;
 
-	dst.x = (0 - 1) / sqrt(2);
-	dst.y = (0 + (2 * 1) + 0) / sqrt(6);
-	mlx_pixel_put(mlx, win, (int)(dst.x + (WINDOW_WIDTH / 2)), (int)(dst.y + (WINDOW_HEIGHT / 2)), 0xFFFFFFFF);
+	dst.x = (50 - 50) / sqrt(2);
+	dst.y = (50 + (2 * 50) + 50) / sqrt(6);
+	mlx_pixel_put(mlx, win, (int)(dst.x + (WINDOW_WIDTH / 2)), (int)(dst.y + (WINDOW_HEIGHT / 2)), 0xFF008000); // vert
+
+	dst.x = (50 - 50) / sqrt(2);
+	dst.y = (50 + (2 * 50) + -50) / sqrt(6);
+	mlx_pixel_put(mlx, win, (int)(dst.x + (WINDOW_WIDTH / 2)), (int)(dst.y + (WINDOW_HEIGHT / 2)), 0xFF91D2FF); // bleu
+	
+	dst.x = (50 - -50) / sqrt(2);
+	dst.y = (50 + (2 * -50) + 50) / sqrt(6);
+	mlx_pixel_put(mlx, win, (int)(dst.x + (WINDOW_WIDTH / 2)), (int)(dst.y + (WINDOW_HEIGHT / 2)), 0xFFFF0000); // rouge
+	
+	dst.x = (50 - 50) / sqrt(2);
+	dst.y = (50 + (2 * 50) + 50) / sqrt(6);
+	mlx_pixel_put(mlx, win, (int)(dst.x + (WINDOW_WIDTH / 2)), (int)(dst.y + (WINDOW_HEIGHT / 2)), 0xFFFFFFFF); // blanc
+
 }
 
 /*int	matrix()
@@ -58,4 +71,8 @@ while (points.data[i])
 	z = index / (cols * rows);
 }*/
 
-t_abs	getcoord()
+//t_abs	getcoord()
+/*	dst.x = (src.x - src.y) / sqrt(2);
+	dst.y = (src.x + (2 * src.y) + src.z) / sqrt(6);
+	mlx_pixel_put(mlx, win, (int)(dst.x + (WINDOW_WIDTH / 2)), (int)(dst.y + (WINDOW_HEIGHT / 2)), 0xFFFFFFFF);
+}*/
