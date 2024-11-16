@@ -11,34 +11,78 @@
 /* ************************************************************************** */
 #include "fdf.h"
 
-/*void	pusher(void *mlx, void *win)
+void	pusher(t_points point, void *mlx, void *win)
 {
+	t_abs	**map;
+	int		x;
+	int		y;
 	int		i;
-	int		*row1 = NULL;
-	int		*row2 = NULL;
-	t_abs	*abs;
+	int		j;
 
-	i = 0;
-	while (y < points.row - 1)
+	while (y < point.rows)
 	{
-		row1 = row2;
-		if (!row1)
-			row1 = &points.data[y * points.cols];
-		row2 = &points.data[(y + 1) * points.cols];
-		x = 0;
-		while (x < points.cols)
+		j = 0;
+		while (x < point.cols)
 		{
-			t_abs[i] = getcoord(points.rows, points.cols, x, y);
+			map[i][j].x = x;
+			map[i][j].y = y;
+			map[i][j].z = 0;
+			j++;
 		}
+		i++;
 	}
-}*/
+}
 
 void	squarelol(void *mlx, void *win)
 {
 	t_vec	dst;
+	double alpha = M_PI / 6;
+	int zoom = 20;
+	int offset_x = WINDOW_WIDTH / 2;
+	int offset_y = WINDOW_HEIGHT / 2;
 
-	dst.x = (50 - 50) / sqrt(2);
-	dst.y = (50 + (2 * 50) + 50) / sqrt(6);
+	dst.x = (0 * cos(alpha) + 
+				0 * cos(alpha + 2.0943951) +
+				0 * cos(alpha - 2.0943951)) * zoom + offset_x;
+
+	dst.y = (0 * sin(alpha) + 
+				0 * sin(alpha + 2.0943951) + 
+				0 * sin(alpha - 2.0943951)) * zoom + offset_y;
+	
+	mlx_pixel_put(mlx, win, (int)(dst.x), (int)(dst.y), 0xFF008000); // vert
+}
+
+/*t_abs get_coord(t_points point, int index, int x, int y)
+{
+	t_abs	map;
+
+	map.x	= x;
+	map.y	= y;
+	map.z = 0;
+	return (map)
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*	dst.x = (0 - 0) / sqrt(2);
+	dst.y = (0 + (2 * 0) + 0) / sqrt(6);
 	mlx_pixel_put(mlx, win, (int)(dst.x + (WINDOW_WIDTH / 2)), (int)(dst.y + (WINDOW_HEIGHT / 2)), 0xFF008000); // vert
 
 	dst.x = (50 - 50) / sqrt(2);
@@ -52,27 +96,11 @@ void	squarelol(void *mlx, void *win)
 	dst.x = (50 - 50) / sqrt(2);
 	dst.y = (50 + (2 * 50) + 50) / sqrt(6);
 	mlx_pixel_put(mlx, win, (int)(dst.x + (WINDOW_WIDTH / 2)), (int)(dst.y + (WINDOW_HEIGHT / 2)), 0xFFFFFFFF); // blanc
-
 }
 
-/*int	matrix()
+int	matrix()
 {
 	matrix[0] = matrix[0] + matrix[0][1] + matrix
 	matrix[1] = 
 	matrix[2] = 
-}
-
-	
-while (points.data[i])
-{
-	y * points.cols + x;
-	x = index % cols;
-	y = (index / cols) % rows;
-	z = index / (cols * rows);
-}*/
-
-//t_abs	getcoord()
-/*	dst.x = (src.x - src.y) / sqrt(2);
-	dst.y = (src.x + (2 * src.y) + src.z) / sqrt(6);
-	mlx_pixel_put(mlx, win, (int)(dst.x + (WINDOW_WIDTH / 2)), (int)(dst.y + (WINDOW_HEIGHT / 2)), 0xFFFFFFFF);
 }*/

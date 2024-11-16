@@ -38,12 +38,6 @@ typedef struct s_buffer {
   char buff[BUFFER_SIZE + 1];
 } t_buffer;
 
-typedef struct s_abs {
-  double x;
-  double y;
-  double z;
-} t_abs;
-
 typedef union u_color {
   struct {
     uint8_t b;
@@ -53,6 +47,13 @@ typedef union u_color {
   };
   uint32_t argb;
 } t_color;
+
+typedef struct s_abs {
+  double x;
+  double y;
+  double z;
+  t_color color;
+} t_abs;
 
 typedef union u_vec {
   struct {
@@ -82,7 +83,7 @@ int ft_lstsizec(t_buffer *lst);
 t_buffer *ft_lstlastc(t_buffer *lst);
 void ft_lstadd_backc(t_buffer **lst, t_buffer *new);
 void squarelol(void *mlx, void *win);
-int parse(char *file_name);
-void pusher(t_points points);
+int	parse(char *file_name, void *mlx, void *win);
+void	pusher(t_points point, void *mlx, void *win);
 int hooking(int key, void *mlx);
 #endif

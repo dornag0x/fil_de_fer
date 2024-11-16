@@ -14,7 +14,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 EXEC = fdf
 LIB = lib/MacroLibX/libmlx.so lib/libft/libft.a
-LIBS = -lSDL2
+LIBS = -lSDL2 -lm
 
 SRC = fdf.c \
 	  hooks.c \

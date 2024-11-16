@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "fdf.h"
 
-int	parse(char *file_name)
+int	parse(char *file_name, void *mlx, void *win)
 {
 	int			fd;
 	t_buffer	*head;
@@ -25,6 +25,7 @@ int	parse(char *file_name)
 	close(fd);
 	src = buff_to_str(head);
 	data = point_parser(src);
+	pusher(data, mlx, win);
 	printf("%s", src);
 	return (0);
 }
