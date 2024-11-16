@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 	win = mlx_new_window(mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "FDF");
 	//pusher(mlx, win);
 	parse(argv[1], mlx, win);
-	squarelol(mlx, win);
+	//squarelol(mlx, win);
 	mlx_on_event(mlx, win, MLX_KEYDOWN, hooking, mlx);
 	mlx_on_event(mlx, win, MLX_WINDOW_EVENT, closewin, mlx);
 	mlx_loop(mlx);

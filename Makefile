@@ -6,7 +6,7 @@
 #    By: hfeufeu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 20:28:29 by hfeufeu           #+#    #+#              #
-#    Updated: 2024/11/12 21:31:06 by hfeufeu          ###   ########.fr        #
+#    Updated: 2024/11/16 20:37:51 by hfeufeu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 CC = gcc
@@ -21,6 +21,7 @@ SRC = fdf.c \
 	  points.c \
 	  parsing.c \
 	  listing.c \
+	  drawer.c \
 
 OBJ = $(SRC:.c=.o)
 

@@ -111,6 +111,7 @@ t_points	point_parser(char *file)
 	points.cols = count;
 	points.rows = elem / count;
 	points.data = data_push(file, elem);
+	points.size = elem;
 	return (points);
 }
 
