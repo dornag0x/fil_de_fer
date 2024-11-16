@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "fdf.h"
 
-void	draw_line(t_vec vec1, t_vec vec2)
+/*void	draw_line(t_vec vec1, t_vec vec2)
 {
 	if (abs(vec1.x - vec2.x) > abs(vec1.y - vec2.y))
 		draw_lineH(vec1, vec2);
@@ -46,8 +46,18 @@ void	draw_lineH(t_vec vec1, t_vec vec2)
 	if (tx != 0)
 	{
 		p = 2 * ty - tx;
+		while (i < (tx + 1))
+		{
+			mlx_pixel_put(mlx, win, (int)(vec1.x + i), (int)(vec1.y), 0xFFFFFFFF); // vert
+			if (p >= 0)
+			{
+				vec1.y += dir;
+				p -= 2 * tx;
+			}
+			p += 2 * ty;
+		}
 	}
 }
 
 void	draw_lineV(t_vec vec1, t_vec vec2)
-{}
+{}*/
