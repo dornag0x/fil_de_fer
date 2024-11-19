@@ -14,81 +14,82 @@
 void	pusher(t_points point, void *mlx, void *win)
 {
 	t_abs	*map;
+	t_vec	*coord;
 	int		x;
 	int		y;
 	int		i;
 
 	map = malloc(sizeof(t_abs) * point.size);
+	coord = malloc(sizeof(t_vec) * point.size);
 	y = 0;
 	i = 0;
-	while (y < point.rows)
+	while (y < (point.rows - 1))
 	{
 		x = 0;
 		while (x < point.cols)
 		{
-			map[i] = get_coord(point, x, y);
+			map[i] = get_coord(point, x, y, point.data[i]);
+			coord[i] = squarelol(map[i]);
 			i++;
 			x++;
 		}
 		y++;
 	}
-	i = 0;
-	while (i < point.size)
-	{
-		squarelol(map[i], mlx, win);
-		i++;
-	}
+	imposter(mlx, win, coord, point);
 }
 
-void	squarelol(t_abs coord, void *mlx, void *win)
+t_vec	squarelol(t_abs coord)
 {
 	t_vec	dst;
-	double alpha = M_PI / 6;
-	int zoom = 20;
-	int offset_x = WINDOW_WIDTH / 2;
-	int offset_y = WINDOW_HEIGHT / 2;
+	double	alpha;
+	int		zoom;
+	int		offset_x;
+	int		offset_y;
 
-	dst.x = (coord.x * cos(alpha) +
-				coord.y * cos(alpha + 2.0943951) +
-				coord.z * cos(alpha - 2.0943951)) * zoom + offset_x;
-	dst.y = (coord.x * sin(alpha) +
-				coord.y * sin(alpha + 2.0943951) +
-				coord.z * sin(alpha - 2.0943951)) * zoom + offset_y;
-	printf("%d, ", dst.x);
-	printf("%d\n", dst.y);
-	mlx_pixel_put(mlx, win, (int)(dst.x), (int)(dst.y), 0xFFFFFFFF); // vert
+	alpha = M_PI / 6;
+	zoom = 20;
+	offset_x = WINDOW_WIDTH / 2;
+	offset_y = WINDOW_HEIGHT / 2;
+	dst.x = (coord.x * cos(alpha)
+			+ coord.y * cos(alpha + 2.0943951)
+			+ coord.z * cos(alpha - 2.0943951)) * zoom + offset_x;
+	dst.y = (coord.x * sin(alpha)
+			+ coord.y * sin(alpha + 2.0943951)
+			+ coord.z * sin(alpha - 2.0943951)) * zoom + offset_y;
+	return (dst);
 }
 
-t_abs get_coord(t_points point, int x, int y)
+t_abs	get_coord(t_points point, int x, int y, int z)
 {
 	t_abs	map;
 
 	map.x = x;
 	map.y = y;
-	map.z = 0;
+	map.z = z;
 	return (map);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*int	matrix()
+void	imposter(void *mlx, void *win, t_vec *vec, t_points point)
 {
-	matrix[0] = matrix[0] + matrix[0][1] + matrix
-	matrix[1] = 
-	matrix[2] = 
-}*/
+	int		p1;
+	int		p2;
+	int		y;
+	int		x;
+
+	y = 0;
+	while (y < (point.rows - 1))
+	{
+		x = 0;
+		while (x < point.cols)
+		{
+			p1 = y * point.cols + (x + 1);
+			p2 = (y + 1) * point.cols + x;
+			if (x != (point.cols - 1))
+				draw_line(mlx, win, vec[y * point.cols + x], vec[p1]);
+			if (y != (point.rows - 2))
+				draw_line(mlx, win, vec[y * point.cols + x], vec[p2]);
+			x++;
+		}
+		y++;
+	}
+}

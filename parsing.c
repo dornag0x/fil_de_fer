@@ -26,7 +26,6 @@ int	parse(char *file_name, void *mlx, void *win)
 	src = buff_to_str(head);
 	data = point_parser(src);
 	pusher(data, mlx, win);
-	printf("%s", src);
 	return (0);
 }
 
@@ -72,10 +71,11 @@ char	*buff_to_str(t_buffer *src)
 	t_buffer	*prev;
 
 	bigsize = get_total_size(src);
-	tmp = (char *)malloc(sizeof(char) * bigsize);
+	tmp = (char *)malloc(sizeof(char) * bigsize + 1);
+	ft_strlcpy(tmp, src->buff, BUFFER_SIZE);
 	while (src->next)
 	{
-		ft_strlcpy(tmp, src->buff, BUFFER_SIZE);
+		ft_strjoin(tmp, src->buff);
 		tmp += BUFFER_SIZE;
 		prev = src;
 		src = src->next;

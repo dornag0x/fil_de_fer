@@ -11,42 +11,6 @@
 /* ************************************************************************** */
 #include "fdf.h"
 
-int	mv_up(int key, void *mlx)
-{
-
-	return (0);
-}
-
-int	mv_right(int key, void *mlx)
-{
-	int	px;
-
-	px = 0;
-	if (key == 79)
-		px = 2;
-	return (0);
-}
-
-int	mv_down(int key, void *mlx)
-{
-	int	px;
-
-	px = 0;
-	if (key == 81)
-		px = 2;
-	return (px);
-}
-
-int	mv_left(int key, void *mlx)
-{
-	int	px;
-
-	px = 0;
-	if (key == 80)
-		px = 2;
-	return (2);
-}
-
 int	hooking(int key, void *mlx)
 {
 	if (key == 40)
@@ -55,25 +19,5 @@ int	hooking(int key, void *mlx)
 		return (2);
 	if (key == 41)
 		mlx_loop_end(mlx);
-	//if (key == 79)
-	//if (key == 81)
-	//if (key == 80)
 	return (0);
 }
-
-/*int hooking(int keycode, t_abs *src) {
-    if (keycode == 82) {
-        src->y -= MOVE_STEP;
-		printf("asdasd");
-    }
-   /* else if (keycode == MLX_KEY_DOWN) {
-        src->y += MOVE_STEP;  // Déplacer vers le bas
-    }
-    else if (keycode == MLX_KEY_LEFT) {
-        src->x -= MOVE_STEP;  // Déplacer vers la gauche
-    }
-    else if (keycode == MLX_KEY_RIGHT) {
-        src->x += MOVE_STEP;  // Déplacer vers la droite
-    }
-    return 0;
-}*/

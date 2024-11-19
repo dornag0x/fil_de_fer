@@ -26,18 +26,16 @@ int closewin(int key, void *mlx)
 
 int main(int argc, char **argv)
 {
-	void		*mlx;
-	void		*win;
-
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "FDF");
+	mlx_t mlx;
+	mlx.mlx = mlx_init();
+	mlx.win = mlx_new_window(mlx.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "FDF");
 	//pusher(mlx, win);
-	parse(argv[1], mlx, win);
+	parse(argv[1], mlx.mlx, mlx.win);
 	//squarelol(mlx, win);
-	mlx_on_event(mlx, win, MLX_KEYDOWN, hooking, mlx);
-	mlx_on_event(mlx, win, MLX_WINDOW_EVENT, closewin, mlx);
-	mlx_loop(mlx);
+	mlx_on_event(mlx.mlx, mlx.win, MLX_KEYDOWN, hooking, mlx.mlx);
+	mlx_on_event(mlx.mlx, mlx.win, MLX_WINDOW_EVENT, closewin, mlx.mlx);
+	mlx_loop(mlx.mlx);
 
-	mlx_destroy_window(mlx, win);
-	mlx_destroy_display(mlx);
+	mlx_destroy_window(mlx.mlx, mlx.win);
+	mlx_destroy_display(mlx.mlx);
 }

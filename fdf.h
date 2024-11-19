@@ -38,6 +38,12 @@ typedef struct s_buffer {
   char buff[BUFFER_SIZE + 1];
 } t_buffer;
 
+typedef struct
+{
+    void* mlx;
+    void* win;
+} mlx_t;
+
 typedef union u_color {
   struct {
     uint8_t b;
@@ -73,22 +79,23 @@ typedef struct s_points {
   int size;
 } t_points;
 
-void draw_line(t_vec vec1, t_vec vec2);
-void draw_lineH(t_vec vec1, t_vec vec2);
-void draw_lineV(t_vec vec1, t_vec vec2);
-t_abs get_coord(t_points point, int x, int y);
-char *ft_substrc(char const *s, unsigned int start, size_t len);
-int *data_push(char *file, int elem);
-t_buffer *read_file(int fd);
-t_points point_parser(char *file);
-char *buff_to_str(t_buffer *src);
-void ft_lstclearc(t_buffer **lst, void (*del)(void *));
-t_buffer *ft_lstnewc(char *content, size_t size);
-int ft_lstsizec(t_buffer *lst);
-t_buffer *ft_lstlastc(t_buffer *lst);
-void ft_lstadd_backc(t_buffer **lst, t_buffer *new);
-void squarelol(t_abs coord, void *mlx, void *win);
-int parse(char *file_name, void *mlx, void *win);
-void pusher(t_points point, void *mlx, void *win);
-int hooking(int key, void *mlx);
+void		imposter(void *mlx, void *win, t_vec *vec, t_points point);
+void		draw_line(void *mlx, void *win, t_vec vec1, t_vec vec2);
+void		draw_lineH(void *mlx, void *win, t_vec vec1, t_vec vec2);
+void		draw_lineV(void *mlx, void *win, t_vec vec1, t_vec vec2);
+t_abs		get_coord(t_points point, int x, int y, int z);
+char		*ft_substrc(char const *s, unsigned int start, size_t len);
+int			*data_push(char *file, int elem);
+t_buffer	*read_file(int fd);
+t_points	point_parser(char *file);
+char		*buff_to_str(t_buffer *src);
+void		ft_lstclearc(t_buffer **lst, void (*del)(void *));
+t_buffer	*ft_lstnewc(char *content, size_t size);
+int			ft_lstsizec(t_buffer *lst);
+t_buffer	*ft_lstlastc(t_buffer *lst);
+void		ft_lstadd_backc(t_buffer **lst, t_buffer *new);
+t_vec		squarelol(t_abs coord);
+int			parse(char *file_name, void *mlx, void *win);
+void		pusher(t_points point, void *mlx, void *win);
+int			hooking(int key, void *mlx);
 #endif

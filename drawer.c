@@ -11,15 +11,15 @@
 /* ************************************************************************** */
 #include "fdf.h"
 
-/*void	draw_line(t_vec vec1, t_vec vec2)
+void	draw_line(void *mlx, void *win, t_vec vec1, t_vec vec2)
 {
 	if (abs(vec1.x - vec2.x) > abs(vec1.y - vec2.y))
-		draw_lineH(vec1, vec2);
+		draw_lineH(mlx, win, vec1, vec2);
 	else
-		draw_lineV(vec1, vec2);
+		draw_lineV(mlx, win, vec1, vec2);
 }
 
-void	draw_lineH(t_vec vec1, t_vec vec2)
+void	draw_lineH(void *mlx, void *win, t_vec vec1, t_vec vec2)
 {
 	int	i;
 	int	tx;
@@ -55,9 +55,48 @@ void	draw_lineH(t_vec vec1, t_vec vec2)
 				p -= 2 * tx;
 			}
 			p += 2 * ty;
+			i++;
 		}
 	}
 }
 
-void	draw_lineV(t_vec vec1, t_vec vec2)
-{}*/
+void	draw_lineV(void *mlx, void *win, t_vec vec1, t_vec vec2)
+{
+	int	i;
+	int	tx;
+	int	ty;
+	int	dir;
+	int	p;
+
+	i = 0;
+	dir = 1;
+	if (vec1.y > vec2.y)
+	{
+		tx = vec1.x;
+		ty = vec1.y;
+		vec1.x = vec2.x;
+		vec1.y = vec2.y;
+		vec2.x = tx;
+		vec2.y = ty;
+	}
+	tx = vec2.x - vec1.x;
+	ty = vec2.y - vec1.y;
+	if (tx < 0)
+		dir = -1;
+	tx *= dir;
+	if (ty != 0)
+	{
+		p = 2 * tx - ty;
+		while (i < (ty + 1))
+		{
+			mlx_pixel_put(mlx, win, (int)(vec1.x), (int)(vec1.y + i), 0xFFFFFFFF); // vert
+			if (p >= 0)
+			{
+				vec1.x += dir;
+				p -= 2 * ty;
+			}
+			p += 2 * tx;
+			i++;
+		}
+	}
+}
