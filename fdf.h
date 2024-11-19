@@ -28,8 +28,8 @@
 #endif
 
 #define PIXEL 3
-#define WINDOW_WIDTH 800  // 640
-#define WINDOW_HEIGHT 600 // 480
+#define WINDOW_WIDTH 1920  // 640
+#define WINDOW_HEIGHT 1080 // 480
 #define MOVE_STEP 10
 
 typedef struct s_buffer {
@@ -79,6 +79,8 @@ typedef struct s_points {
   int size;
 } t_points;
 
+int			get_and_show(int key, void *mlx);
+int			mouser(int key, void *mlx);
 int			push_color(char *str);
 void		imposter(void *mlx, void *win, t_vec *vec, t_points point);
 void		draw_line(void *mlx, void *win, t_vec vec1, t_vec vec2);
@@ -95,7 +97,7 @@ t_buffer	*ft_lstnewc(char *content, size_t size);
 int			ft_lstsizec(t_buffer *lst);
 t_buffer	*ft_lstlastc(t_buffer *lst);
 void		ft_lstadd_backc(t_buffer **lst, t_buffer *new);
-t_vec		squarelol(t_abs coord);
+t_vec		squarelol(t_abs coord, int off_x, int off_y);
 int			parse(char *file_name, void *mlx, void *win);
 void		pusher(t_points point, void *mlx, void *win);
 int			hooking(int key, void *mlx);

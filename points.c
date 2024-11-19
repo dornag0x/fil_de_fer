@@ -15,6 +15,8 @@ void	pusher(t_points point, void *mlx, void *win)
 {
 	t_abs	*map;
 	t_vec	*coord;
+	int		off_x = WINDOW_WIDTH / 2;
+	int		off_y = WINDOW_HEIGHT / 2;
 	int		x;
 	int		y;
 	int		i;
@@ -29,7 +31,7 @@ void	pusher(t_points point, void *mlx, void *win)
 		while (x < point.cols)
 		{
 			map[i] = get_coord(point, x, y, point.data[i]);
-			coord[i] = squarelol(map[i]);
+			coord[i] = squarelol(map[i], off_x, off_y);
 			i++;
 			x++;
 		}
@@ -38,24 +40,20 @@ void	pusher(t_points point, void *mlx, void *win)
 	imposter(mlx, win, coord, point);
 }
 
-t_vec	squarelol(t_abs coord)
+t_vec	squarelol(t_abs coord, int off_x, int off_y)
 {
 	t_vec	dst;
 	double	alpha;
 	int		zoom;
-	int		offset_x;
-	int		offset_y;
 
 	alpha = M_PI / 6;
 	zoom = 20;
-	offset_x = WINDOW_WIDTH / 2;
-	offset_y = WINDOW_HEIGHT / 2;
 	dst.x = (coord.x * cos(alpha)
 			+ coord.y * cos(alpha + 2.0943951)
-			+ coord.z * cos(alpha - 2.0943951)) * zoom + offset_x;
+			+ coord.z * cos(alpha - 2.0943951)) * zoom + off_x;
 	dst.y = (coord.x * sin(alpha)
 			+ coord.y * sin(alpha + 2.0943951)
-			+ coord.z * sin(alpha - 2.0943951)) * zoom + offset_y;
+			+ coord.z * sin(alpha - 2.0943951)) * zoom + off_y;
 	return (dst);
 }
 

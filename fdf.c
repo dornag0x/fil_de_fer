@@ -32,6 +32,8 @@ int main(int argc, char **argv)
 	//pusher(mlx, win);
 	parse(argv[1], mlx.mlx, mlx.win);
 	//squarelol(mlx, win);
+	mlx_on_event(mlx.mlx, mlx.win, MLX_MOUSEDOWN, mouser, mlx.mlx);
+	mlx_on_event(mlx.mlx, mlx.win, MLX_MOUSEUP, get_and_show, mlx.mlx);
 	mlx_on_event(mlx.mlx, mlx.win, MLX_KEYDOWN, hooking, mlx.mlx);
 	mlx_on_event(mlx.mlx, mlx.win, MLX_WINDOW_EVENT, closewin, mlx.mlx);
 	mlx_loop(mlx.mlx);
