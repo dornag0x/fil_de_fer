@@ -25,6 +25,7 @@ int	parse(char *file_name, void *mlx, void *win)
 	close(fd);
 	src = buff_to_str(head);
 	data = point_parser(src);
+	printf("%s\n", src);
 	pusher(data, mlx, win);
 	return (0);
 }
@@ -72,6 +73,7 @@ char	*buff_to_str(t_buffer *src)
 
 	bigsize = get_total_size(src);
 	tmp = (char *)malloc(sizeof(char) * bigsize + 1);
+	tmp[bigsize] = '\0';
 	ft_strlcpy(tmp, src->buff, BUFFER_SIZE);
 	while (src->next)
 	{
@@ -82,16 +84,15 @@ char	*buff_to_str(t_buffer *src)
 		free(prev);
 	}
 	ft_strlcpy(tmp, src->buff, BUFFER_SIZE);
-	tmp[bigsize] = '\0';
 	return (tmp);
 }
 
 t_points	point_parser(char *file)
 {
-	t_points	points;
-	int			i;
-	int			count;
-	int			elem;
+	t_points		points;
+	unsigned int	i;
+	int				count;
+	int				elem;
 
 	i = 0;
 	count = 0;

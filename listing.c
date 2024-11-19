@@ -59,7 +59,7 @@ t_buffer *ft_lstnewc(char *content, size_t size)
         return (NULL);
     }
     ft_strlcpy(new->buff, content, size + 1);
-	new->size = ft_strlen(content);
+	new->size = ft_strlen(new->buff);
     new->next = NULL;
     return (new);
 }

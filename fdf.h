@@ -79,6 +79,7 @@ typedef struct s_points {
   int size;
 } t_points;
 
+int			push_color(char *str);
 void		imposter(void *mlx, void *win, t_vec *vec, t_points point);
 void		draw_line(void *mlx, void *win, t_vec vec1, t_vec vec2);
 void		draw_lineH(void *mlx, void *win, t_vec vec1, t_vec vec2);

@@ -22,6 +22,7 @@ SRC = fdf.c \
 	  parsing.c \
 	  listing.c \
 	  drawer.c \
+	  color.c \
 
 OBJ = $(SRC:.c=.o)
 
