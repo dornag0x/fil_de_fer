@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   points.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfeufeu <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: hfeufeu <hfeufeu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 16:13:25 by hfeufeu           #+#    #+#             */
-/*   Updated: 2024/11/13 14:38:22 by hfeufeu          ###   ########.fr       */
+/*   Updated: 2025/02/20 18:07:04 by hfeufeu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "fdf.h"
+
+#include <fdf.h>
 
 void	pusher(t_points point, void *mlx, void *win)
 {
@@ -30,7 +31,7 @@ void	pusher(t_points point, void *mlx, void *win)
 		x = 0;
 		while (x < point.cols)
 		{
-			map[i] = get_coord(point, x, y, point.data[i]);
+			map[i] = get_coord(x, y, point.data[i]);
 			coord[i] = squarelol(map[i], off_x, off_y);
 			i++;
 			x++;
@@ -57,7 +58,7 @@ t_vec	squarelol(t_abs coord, int off_x, int off_y)
 	return (dst);
 }
 
-t_abs	get_coord(t_points point, int x, int y, int z)
+t_abs	get_coord(int x, int y, int z)
 {
 	t_abs	map;
 

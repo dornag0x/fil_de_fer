@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfeufeu <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: hfeufeu <hfeufeu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:42:10 by hfeufeu           #+#    #+#             */
-/*   Updated: 2024/11/12 23:35:11 by hfeufeu          ###   ########.fr       */
+/*   Updated: 2025/02/20 18:13:05 by hfeufeu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "fdf.h"
 
-/*int key_hook(int keycode, void *mlx)
-{
-    printf("Key pressed: %d\n", keycode);
-    return (0);
-}*/
+#include <fdf.h>
+
+// int key_hook(int keycode, void *mlx)
+// {
+//     printf("Key pressed: %d\n", keycode);
+//     return (0);
+// }
 
 int closewin(int key, void *mlx)
 {
@@ -26,6 +27,7 @@ int closewin(int key, void *mlx)
 
 int main(int argc, char **argv)
 {
+	(void)argc;
 	mlx_t mlx;
 	mlx.mlx = mlx_init();
 	mlx.win = mlx_new_window(mlx.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "FDF");

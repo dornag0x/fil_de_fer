@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfeufeu <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: hfeufeu <hfeufeu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 00:44:35 by hfeufeu           #+#    #+#             */
-/*   Updated: 2024/11/13 13:30:23 by hfeufeu          ###   ########.fr       */
+/*   Updated: 2025/02/20 18:01:29 by hfeufeu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "fdf.h"
+
+#include <fdf.h>
 
 int	parse(char *file_name, void *mlx, void *win)
 {
@@ -131,7 +132,7 @@ int	*data_push(char *file, int elem)
 	while (file[i])
 	{
 		start = i;
-		while (file[i] >= '0' && file[i] <= '9' || file[i] == '-')
+		while ((file[i] >= '0' && file[i] <= '9') || file[i] == '-')
 		{
 			i++;
 			if (!(file[i] >= '0' && file[i] <= '9'))

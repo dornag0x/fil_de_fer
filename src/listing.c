@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   listing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfeufeu <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: hfeufeu <hfeufeu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 22:27:38 by hfeufeu           #+#    #+#             */
-/*   Updated: 2024/11/13 00:02:38 by hfeufeu          ###   ########.fr       */
+/*   Updated: 2025/02/20 18:02:14 by hfeufeu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "fdf.h"
+
+#include <fdf.h>
 
 int	ft_lstsizec(t_buffer *lst)
 {
@@ -53,11 +54,6 @@ t_buffer *ft_lstnewc(char *content, size_t size)
     new = (t_buffer *)malloc(sizeof(t_buffer));
     if (!new)
         return (NULL);
-    if (!new->buff)
-    {
-        free(new);
-        return (NULL);
-    }
     ft_strlcpy(new->buff, content, size + 1);
 	new->size = ft_strlen(new->buff);
     new->next = NULL;

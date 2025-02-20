@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfeufeu <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: hfeufeu <hfeufeu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:30:00 by hfeufeu           #+#    #+#             */
-/*   Updated: 2024/11/16 20:55:41 by hfeufeu          ###   ########.fr       */
+/*   Updated: 2025/02/20 18:13:21 by hfeufeu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef FDF_H
 #define FDF_H
 
@@ -20,8 +21,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "lib/MacroLibX/includes/mlx.h"
-#include "lib/libft/libft.h"
+#include "../mlx/includes/mlx.h"
+#include "../libft/libft.h"
 
 #ifndef BUFFER_SIZE
 #define BUFFER_SIZE 6500
@@ -86,7 +87,7 @@ void		imposter(void *mlx, void *win, t_vec *vec, t_points point);
 void		draw_line(void *mlx, void *win, t_vec vec1, t_vec vec2);
 void		draw_lineH(void *mlx, void *win, t_vec vec1, t_vec vec2);
 void		draw_lineV(void *mlx, void *win, t_vec vec1, t_vec vec2);
-t_abs		get_coord(t_points point, int x, int y, int z);
+t_abs		get_coord(int x, int y, int z);
 char		*ft_substrc(char const *s, unsigned int start, size_t len);
 int			*data_push(char *file, int elem);
 t_buffer	*read_file(int fd);

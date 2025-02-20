@@ -48,7 +48,7 @@ void	draw_lineH(void *mlx, void *win, t_vec vec1, t_vec vec2)
 		p = 2 * ty - tx;
 		while (i < (tx + 1))
 		{
-			mlx_pixel_put(mlx, win, (int)(vec1.x + i), (int)(vec1.y), 0xFFFFFFFF); // vert
+			mlx_pixel_put(mlx, win, (int)(vec1.x + i), (int)(vec1.y), 0xFFFFFFFF); // blanc
 			if (p >= 0)
 			{
 				vec1.y += dir;
@@ -89,7 +89,7 @@ void	draw_lineV(void *mlx, void *win, t_vec vec1, t_vec vec2)
 		p = 2 * tx - ty;
 		while (i < (ty + 1))
 		{
-			mlx_pixel_put(mlx, win, (int)(vec1.x), (int)(vec1.y + i), 0xFFFFFFFF); // vert
+			mlx_pixel_put(mlx, win, (int)(vec1.x), (int)(vec1.y + i), 0xFFFFFFFF); // blanc
 			if (p >= 0)
 			{
 				vec1.x += dir;
