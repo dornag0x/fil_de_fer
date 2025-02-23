@@ -6,7 +6,7 @@
 #    By: hfeufeu <hfeufeu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 20:28:29 by hfeufeu           #+#    #+#              #
-#    Updated: 2025/02/20 18:17:10 by hfeufeu          ###   ########.fr        #
+#    Updated: 2025/02/22 15:03:54 by hfeufeu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ OBJ := $(addprefix $(OBJDIR)/, $(SRC:%.c=%.o))
 
 IFLAGS = -I ./include -I $(MLX_DIR)
 
-LIB = -L$(LIBFT_DIR) -g -lft -L $(MLX_DIR) -lmlx -lm -lX11 -lXext -lSDL2
+LIB = -L$(LIBFT_DIR) -g -lft -L $(MLX_DIR) -lSDL2
+LDFLAGS = -Lmlx -lmlx -lm -lX11 -lXext -Wl,-rpath,./mlx
 
 RED = \033[31m
 GREEN = \033[32m
@@ -70,7 +71,8 @@ $(LIBFT):
 
 $(EXEC): $(OBJ)
 	@echo "$(GREEN)[Linking] Creating executable $(EXEC)...$(RESET)"
-	@$(CC) $(OBJ) $(LIB) -o $(EXEC)
+	@$(CC) $(OBJ) $(LIB) $(LDFLAGS) -o $(EXEC)
+	@cp $(MLX) .
 	@echo "$(GREEN)[Executable generated] You can run it with './$(EXEC)'$(RESET)"
 
 test: CFLAGS =
@@ -81,13 +83,11 @@ clean:
 	@echo "$(RED)[Cleaning] Removing object files...$(RESET)"
 	@rm -f -r $(OBJ) $(OBJDIR)
 	@$(MAKE) -s -C $(LIBFT_DIR) clean
-	@$(MAKE) -s -C $(FT_PRINTF_DIR) clean
 
 fclean: clean
 	@echo "$(RED)[Full cleanup] Removing executable...$(RESET)"
-	@rm -f -r $(EXEC)
+	@rm -f -r $(EXEC) libmlx.so
 	@$(MAKE) -s -C $(LIBFT_DIR) fclean
-	@$(MAKE) -s -C $(FT_PRINTF_DIR) fclean
 
 re: fclean all
 	@echo "$(GREEN)[Rebuilding] Everything is recompiled!$(RESET)"

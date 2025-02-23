@@ -3,13 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   drawer.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfeufeu <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: hfeufeu <hfeufeu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 20:33:29 by hfeufeu           #+#    #+#             */
-/*   Updated: 2024/11/16 20:55:40 by hfeufeu          ###   ########.fr       */
+/*   Updated: 2025/02/23 19:54:45 by hfeufeu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "fdf.h"
+
+#include <fdf.h>
+
+static int is_in_window(int x, int y)
+{
+	if (x > 0 && x <= (WINDOW_WIDTH - 1)
+		&& y > 0 && y <= (WINDOW_HEIGHT - 1))
+		return (1);
+	return (0);
+}
 
 void	draw_line(void *mlx, void *win, t_vec vec1, t_vec vec2)
 {
@@ -46,9 +55,10 @@ void	draw_lineH(void *mlx, void *win, t_vec vec1, t_vec vec2)
 	if (tx != 0)
 	{
 		p = 2 * ty - tx;
-		while (i < (tx + 1))
+		while (i < tx)
 		{
-			mlx_pixel_put(mlx, win, (int)(vec1.x + i), (int)(vec1.y), 0xFFFFFFFF); // blanc
+			if (is_in_window((vec1.x + i), vec1.y))
+				mlx_pixel_put(mlx, win, (int)(vec1.x + i), (int)(vec1.y), 0xFFFFFFFF); // blanc
 			if (p >= 0)
 			{
 				vec1.y += dir;
@@ -87,9 +97,10 @@ void	draw_lineV(void *mlx, void *win, t_vec vec1, t_vec vec2)
 	if (ty != 0)
 	{
 		p = 2 * tx - ty;
-		while (i < (ty + 1))
+		while (i < ty)
 		{
-			mlx_pixel_put(mlx, win, (int)(vec1.x), (int)(vec1.y + i), 0xFFFFFFFF); // blanc
+			if (is_in_window(vec1.x, (vec1.y + i)))
+				mlx_pixel_put(mlx, win, (int)(vec1.x), (int)(vec1.y + i), 0xFFFFFFFF); // blanc
 			if (p >= 0)
 			{
 				vec1.x += dir;

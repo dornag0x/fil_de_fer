@@ -5,140 +5,161 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hfeufeu <hfeufeu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/09 00:44:35 by hfeufeu           #+#    #+#             */
-/*   Updated: 2025/02/20 18:01:29 by hfeufeu          ###   ########.fr       */
+/*   Created: 2024/02/23 10:44:35 by hfeufeu           #+#    #+#             */
+/*   Updated: 2025/02/23 15:42:20 by hfeufeu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-int	parse(char *file_name, void *mlx, void *win)
+static void	get_dimensions(char *str, size_t size, t_points *points)
 {
-	int			fd;
-	t_buffer	*head;
-	t_points	data;
-	char		*src;
-
-	fd = open(file_name, O_RDONLY);
-	if (fd < 0)
-		return (-1);
-	head = read_file(fd);
-	close(fd);
-	src = buff_to_str(head);
-	data = point_parser(src);
-	printf("%s\n", src);
-	pusher(data, mlx, win);
-	return (0);
-}
-
-t_buffer	*read_file(int fd)
-{
-	t_buffer	*head;
-	t_buffer	*new_node;
-	char		buffer[BUFFER_SIZE + 1];
-	int			bytes;
-
-	head = NULL;
-	bytes = read(fd, buffer, BUFFER_SIZE);
-	while (bytes > 0)
-	{
-		new_node = ft_lstnewc(buffer, bytes);
-		if (!new_node)
-			return (NULL);
-		ft_lstadd_backc(&head, new_node);
-		bytes = read(fd, buffer, BUFFER_SIZE);
-	}
-	if (bytes == -1)
-		return (NULL);
-	return (head);
-}
-
-size_t	get_total_size(t_buffer *head)
-{
-	size_t	size;
-
-	size = 0;
-	while (head)
-	{
-		size += head->size;
-		head = head->next;
-	}
-	return (size);
-}
-
-char	*buff_to_str(t_buffer *src)
-{
-	char		*tmp;
-	size_t		bigsize;
-	t_buffer	*prev;
-
-	bigsize = get_total_size(src);
-	tmp = (char *)malloc(sizeof(char) * bigsize + 1);
-	tmp[bigsize] = '\0';
-	ft_strlcpy(tmp, src->buff, BUFFER_SIZE);
-	while (src->next)
-	{
-		ft_strjoin(tmp, src->buff);
-		tmp += BUFFER_SIZE;
-		prev = src;
-		src = src->next;
-		free(prev);
-	}
-	ft_strlcpy(tmp, src->buff, BUFFER_SIZE);
-	return (tmp);
-}
-
-t_points	point_parser(char *file)
-{
-	t_points		points;
-	unsigned int	i;
-	int				count;
-	int				elem;
+	size_t	i;
+	int		current_row;
+	int		count;
+	int		elem;
 
 	i = 0;
 	count = 0;
 	elem = 0;
-	while (file[i])
+	current_row = 0;
+	while (i < size)
 	{
-		while (file[i] >= '0' && file[i] <= '9')
-		{
+		while (i < size && str[i] == ' ')
 			i++;
-			if (!(file[i] >= '0' && file[i] <= '9'))
-				elem++;
+		if (i < size && (str[i] == '-' || (str[i] >= '0' && str[i] <= '9')))
+		{
+			elem++;
+			current_row++;
+			while (i < size && str[i] != ' ' && str[i] != '\n' && str[i] != ',')
+				i++;
+			if (i < size && str[i] == ',')
+				while (i < size && str[i] != ' ' && str[i] != '\n')
+					i++;
 		}
-		if (file[i] == '\n')
+		if (i < size && str[i] == '\n')
+		{
 			count++;
-		i++;
+			if (points->rows == 0)
+				points->rows = current_row;
+			current_row = 0;
+		}
+		if (i < size)
+			i++;
 	}
-	points.cols = count;
-	points.rows = elem / count;
-	points.data = data_push(file, elem);
-	points.size = elem;
-	return (points);
+	if (current_row > 0)
+		count++;
+	points->cols = count;
+	points->size = elem;
 }
 
-int	*data_push(char *file, int elem)
+static char	*read_file_fast(int fd, size_t *total_size)
 {
-	int	i;
-	int	j;
-	int	start;
-	int	*tab;
+	char	*buffer;
+	char	*new_buffer;
+	size_t	capacity;
+	size_t	size;
+	ssize_t	bytes;
+
+	capacity = BUFFER_SIZE;
+	size = 0;
+	buffer = malloc(capacity);
+	if (!buffer)
+		return (NULL);
+	while ((bytes = read(fd, buffer + size, BUFFER_SIZE)) > 0)
+	{
+		size += bytes;
+		if (size + BUFFER_SIZE > capacity)
+		{
+			capacity *= 2;
+			new_buffer = realloc(buffer, capacity);
+			if (!new_buffer)
+			{
+				free(buffer);
+				return (NULL);
+			}
+			buffer = new_buffer;
+		}
+	}
+	if (bytes < 0)
+	{
+		free(buffer);
+		return (NULL);
+	}
+	*total_size = size;
+	return (buffer);
+}
+
+static void	skip_color(const char *str, size_t *i)
+{
+	if (str[*i] == ',')
+	{
+		(*i)++;
+		while (str[*i] && str[*i] != ' ' && str[*i] != '\n')
+			(*i)++;
+	}
+}
+
+static int	fast_fill_data(char *content, size_t size, t_points *points)
+{
+	size_t	i;
+	int		j;
+	int		num;
+	int		sign;
 
 	i = 0;
 	j = 0;
-	tab = (int *)malloc(sizeof(int) * elem);
-	if (!tab)
-		return (0);
-	while (file[i])
+	while (i < size && j < points->size)
 	{
-		start = i;
-		while ((file[i] >= '0' && file[i] <= '9') || file[i] == '-')
-		{
+		while (i < size && content[i] == ' ')
 			i++;
-			if (!(file[i] >= '0' && file[i] <= '9'))
-				tab[j++] = ft_atoi(ft_substrc(file, start, i + 1));
+		if (i < size && (content[i] == '-' || (content[i] >= '0'
+					&& content[i] <= '9')))
+		{
+			num = 0;
+			sign = (content[i] == '-') ? -1 : 1;
+			if (content[i] == '-')
+				i++;
+			while (i < size && content[i] >= '0' && content[i] <= '9')
+				num = num * 10 + (content[i++] - '0');
+			points->data[j++] = num * sign;
+			skip_color(content, &i);
 		}
-		i++;
+		if (i < size)
+			i++;
 	}
-	return (tab);
+	return (0);
+}
+
+int	parse(char *file_name, void *mlx, void *win)
+{
+	int			fd;
+	char		*content;
+	size_t		file_size;
+	t_points	points;
+
+	fd = open(file_name, O_RDONLY);
+	if (fd < 0)
+		return (-1);
+	content = read_file_fast(fd, &file_size);
+	close(fd);
+	if (!content)
+		return (-1);
+	ft_memset(&points, 0, sizeof(t_points));
+	get_dimensions(content, file_size, &points);
+	points.data = malloc(sizeof(int) * points.size);
+	if (!points.data)
+	{
+		free(content);
+		return (-1);
+	}
+	if (fast_fill_data(content, file_size, &points) < 0)
+	{
+		free(content);
+		free(points.data);
+		return (-1);
+	}
+	free(content);
+	pusher(points, mlx, win);
+	return (0);
 }

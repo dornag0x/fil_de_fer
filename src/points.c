@@ -6,7 +6,7 @@
 /*   By: hfeufeu <hfeufeu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 16:13:25 by hfeufeu           #+#    #+#             */
-/*   Updated: 2025/02/20 18:07:04 by hfeufeu          ###   ########.fr       */
+/*   Updated: 2025/02/23 20:07:19 by hfeufeu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ t_vec	squarelol(t_abs coord, int off_x, int off_y)
 {
 	t_vec	dst;
 	double	alpha;
-	int		zoom;
+	double	zoom;
 
 	alpha = M_PI / 6;
-	zoom = 20;
+	zoom = 12;
 	dst.x = (coord.x * cos(alpha)
 			+ coord.y * cos(alpha + 2.0943951)
 			+ coord.z * cos(alpha - 2.0943951)) * zoom + off_x;

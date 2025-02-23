@@ -6,7 +6,7 @@
 /*   By: hfeufeu <hfeufeu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:30:00 by hfeufeu           #+#    #+#             */
-/*   Updated: 2025/02/20 18:13:21 by hfeufeu          ###   ########.fr       */
+/*   Updated: 2025/02/23 20:04:56 by hfeufeu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 #include "../libft/libft.h"
 
 #ifndef BUFFER_SIZE
-#define BUFFER_SIZE 6500
+#define BUFFER_SIZE 65536
 #endif
 
 #define PIXEL 3
@@ -80,26 +80,26 @@ typedef struct s_points {
   int size;
 } t_points;
 
-int			get_and_show(int key, void *mlx);
-int			mouser(int key, void *mlx);
-int			push_color(char *str);
-void		imposter(void *mlx, void *win, t_vec *vec, t_points point);
-void		draw_line(void *mlx, void *win, t_vec vec1, t_vec vec2);
-void		draw_lineH(void *mlx, void *win, t_vec vec1, t_vec vec2);
-void		draw_lineV(void *mlx, void *win, t_vec vec1, t_vec vec2);
-t_abs		get_coord(int x, int y, int z);
-char		*ft_substrc(char const *s, unsigned int start, size_t len);
-int			*data_push(char *file, int elem);
-t_buffer	*read_file(int fd);
-t_points	point_parser(char *file);
-char		*buff_to_str(t_buffer *src);
-void		ft_lstclearc(t_buffer **lst, void (*del)(void *));
+int			  get_and_show(int key, void *mlx);
+int			  mouser(int key, void *mlx);
+int			  push_color(char *str);
+void		  imposter(void *mlx, void *win, t_vec *vec, t_points point);
+void		  draw_line(void *mlx, void *win, t_vec vec1, t_vec vec2);
+void		  draw_lineH(void *mlx, void *win, t_vec vec1, t_vec vec2);
+void		  draw_lineV(void *mlx, void *win, t_vec vec1, t_vec vec2);
+t_abs		  get_coord(int x, int y, int z);
+char		  *ft_substrc(char const *s, unsigned int start, size_t len);
+int			  *data_push(char *file, int elem);
+t_buffer  *read_file(int fd);
+t_points  point_parser(char *file);
+char      *buff_to_str(t_buffer *src);
+void		  ft_lstclearc(t_buffer **lst, void (*del)(void *));
 t_buffer	*ft_lstnewc(char *content, size_t size);
-int			ft_lstsizec(t_buffer *lst);
+int			  ft_lstsizec(t_buffer *lst);
 t_buffer	*ft_lstlastc(t_buffer *lst);
-void		ft_lstadd_backc(t_buffer **lst, t_buffer *new);
-t_vec		squarelol(t_abs coord, int off_x, int off_y);
-int			parse(char *file_name, void *mlx, void *win);
-void		pusher(t_points point, void *mlx, void *win);
-int			hooking(int key, void *mlx);
+void		  ft_lstadd_backc(t_buffer **lst, t_buffer *new);
+t_vec		  squarelol(t_abs coord, int off_x, int off_y);
+int			  parse(char *file_name, void *mlx, void *win);
+void		  pusher(t_points point, void *mlx, void *win);
+int			  hooking(int key, void *mlx);
 #endif
