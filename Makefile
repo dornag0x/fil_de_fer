@@ -6,7 +6,7 @@
 #    By: hfeufeu <hfeufeu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 20:28:29 by hfeufeu           #+#    #+#              #
-#    Updated: 2025/02/22 15:03:54 by hfeufeu          ###   ########.fr        #
+#    Updated: 2025/02/24 18:48:18 by hfeufeu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,12 +22,11 @@ OBJDIR = .build
 SRCDIR = src
 
 SRC = fdf.c \
-	  hooks.c \
+	  fdf_utils.c \
 	  points.c \
 	  parsing.c \
 	  listing.c \
 	  drawer.c \
-	  color.c \
 
 SRC := $(addprefix $(SRCDIR)/, $(SRC))
 

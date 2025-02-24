@@ -6,38 +6,46 @@
 /*   By: hfeufeu <hfeufeu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 16:13:25 by hfeufeu           #+#    #+#             */
-/*   Updated: 2025/02/24 15:24:23 by hfeufeu          ###   ########.fr       */
+/*   Updated: 2025/02/24 19:26:33 by hfeufeu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fdf.h>
 
-void	pusher(t_points point, void *mlx, void *win)
+static void	init_map_coords(t_points point, t_abs **map, t_vec **coord, int *i)
 {
-	t_abs	*map;
-	t_vec	*coord;
-	int		off_x = WINDOW_WIDTH / 2;
-	int		off_y = WINDOW_HEIGHT / 2;
-	int		x;
-	int		y;
-	int		i;
+	int	x;
+	int	y;
+	int	off_x;
+	int	off_y;
 
-	map = malloc(sizeof(t_abs) * point.size);
-	coord = malloc(sizeof(t_vec) * point.size);
+	off_x = WINDOW_WIDTH / 2;
+	off_y = WINDOW_HEIGHT / 2;
+	*map = malloc(sizeof(t_abs) * point.size);
+	*coord = malloc(sizeof(t_vec) * point.size);
 	y = 0;
-	i = 0;
+	*i = 0;
 	while (y < (point.rows - 1))
 	{
 		x = 0;
 		while (x < point.cols)
 		{
-			map[i] = get_coord(x, y, point.data[i]);
-			coord[i] = squarelol(map[i], off_x, off_y);
-			i++;
+			(*map)[*i] = get_coord(x, y, point.data[*i]);
+			(*coord)[*i] = squarelol((*map)[*i], off_x, off_y);
+			(*i)++;
 			x++;
 		}
 		y++;
 	}
+}
+
+void	pusher(t_points point, void *mlx, void *win)
+{
+	t_abs	*map;
+	t_vec	*coord;
+	int		i;
+
+	init_map_coords(point, &map, &coord, &i);
 	imposter(mlx, win, coord, point);
 }
 
@@ -48,7 +56,7 @@ t_vec	squarelol(t_abs coord, int off_x, int off_y)
 	double	zoom;
 
 	alpha = M_PI / 6;
-	zoom = 5;
+	zoom = 20;
 	dst.x = (coord.x * cos(alpha)
 			+ coord.y * cos(alpha + 2.0943951)
 			+ coord.z * cos(alpha - 2.0943951)) * zoom + off_x;

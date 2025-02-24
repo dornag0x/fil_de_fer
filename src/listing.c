@@ -6,7 +6,7 @@
 /*   By: hfeufeu <hfeufeu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 22:27:38 by hfeufeu           #+#    #+#             */
-/*   Updated: 2025/02/20 18:02:14 by hfeufeu          ###   ########.fr       */
+/*   Updated: 2025/02/24 18:48:37 by hfeufeu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,17 @@ void	ft_lstadd_backc(t_buffer **lst, t_buffer *new)
 		*lst = new;
 }
 
-t_buffer *ft_lstnewc(char *content, size_t size)
+t_buffer	*ft_lstnewc(char *content, size_t size)
 {
-    t_buffer *new;
+	t_buffer	*new;
 
-    new = (t_buffer *)malloc(sizeof(t_buffer));
-    if (!new)
-        return (NULL);
-    ft_strlcpy(new->buff, content, size + 1);
+	new = (t_buffer *)malloc(sizeof(t_buffer));
+	if (!new)
+		return (NULL);
+	ft_strlcpy(new->buff, content, size + 1);
 	new->size = ft_strlen(new->buff);
-    new->next = NULL;
-    return (new);
+	new->next = NULL;
+	return (new);
 }
 
 void	ft_lstclearc(t_buffer **lst, void (*del)(void*))
@@ -74,29 +74,4 @@ void	ft_lstclearc(t_buffer **lst, void (*del)(void*))
 		*lst = sack;
 	}
 	(*lst) = NULL;
-}
-
-char	*ft_substrc(char const *s, unsigned int start, size_t len)
-{
-	unsigned int	j;
-	char			*des;
-
-	j = 0;
-	if (!s)
-		return (NULL);
-	if ((start + len) > ft_strlen(s))
-		len = (ft_strlen(s) - start);
-	if (start >= ft_strlen(s) || s == NULL)
-		return (ft_strdup(""));
-	des = malloc(sizeof(char) * (len) + 1);
-	if (!des)
-		return (NULL);
-	while (s[start] != '\0' && j < len)
-	{
-		des[j] = s[start];
-		j++;
-		start++;
-	}
-	des[j] = '\0';
-	return (des);
 }

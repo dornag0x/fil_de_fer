@@ -6,7 +6,7 @@
 /*   By: hfeufeu <hfeufeu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 10:44:35 by hfeufeu           #+#    #+#             */
-/*   Updated: 2025/02/23 15:42:20 by hfeufeu          ###   ########.fr       */
+/*   Updated: 2025/02/24 19:46:00 by hfeufeu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,9 @@ static int	fast_fill_data(char *content, size_t size, t_points *points)
 	}
 	return (0);
 }
+
+void	check_data()
+{}
 
 int	parse(char *file_name, void *mlx, void *win)
 {

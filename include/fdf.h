@@ -6,34 +6,35 @@
 /*   By: hfeufeu <hfeufeu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:30:00 by hfeufeu           #+#    #+#             */
-/*   Updated: 2025/02/23 20:04:56 by hfeufeu          ###   ########.fr       */
+/*   Updated: 2025/02/24 19:36:33 by hfeufeu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
-#define FDF_H
+# define FDF_H
 
-#include <fcntl.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <unistd.h>
+# include <fcntl.h>
+# include <math.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <unistd.h>
 
-#include "../mlx/includes/mlx.h"
-#include "../libft/libft.h"
+# include "../mlx/includes/mlx.h"
+# include "../libft/libft.h"
 
-#ifndef BUFFER_SIZE
-#define BUFFER_SIZE 65536
-#endif
+# ifndef BUFFER_SIZE
+# define BUFFER_SIZE 65536
+# endif
 
-#define PIXEL 3
-#define WINDOW_WIDTH 1920  // 640
-#define WINDOW_HEIGHT 1080 // 480
-#define MOVE_STEP 10
+# define PIXEL 3
+# define WINDOW_WIDTH 1920  // 640
+# define WINDOW_HEIGHT 1080 // 480
+# define MOVE_STEP 10
 
-typedef struct s_buffer {
+typedef struct s_buffer
+{
   struct s_buffer *next;
   size_t size;
   char buff[BUFFER_SIZE + 1];
@@ -45,48 +46,34 @@ typedef struct
     void* win;
 } mlx_t;
 
-typedef union u_color {
-  struct {
-    uint8_t b;
-    uint8_t g;
-    uint8_t r;
-    uint8_t a;
-  };
-  uint32_t argb;
-} t_color;
-
-typedef struct s_abs {
+typedef struct s_abs
+{
   double x;
   double y;
   double z;
-  t_color color;
 } t_abs;
 
-typedef union u_vec {
-  struct {
-    int x;
-    int y;
-  };
-  struct {
-    float fx;
-    float fy;
-  };
+typedef struct u_vec
+{
+  int x;
+  int y;
+  int tx;
+  int ty;
 } t_vec;
 
-typedef struct s_points {
+typedef struct s_points
+{
   int *data;
   int cols;
   int rows;
   int size;
 } t_points;
 
-int			  get_and_show(int key, void *mlx);
-int			  mouser(int key, void *mlx);
-int			  push_color(char *str);
+int       valid_step(int d);
 void		  imposter(void *mlx, void *win, t_vec *vec, t_points point);
 void		  draw_line(void *mlx, void *win, t_vec vec1, t_vec vec2);
-void		  draw_lineH(void *mlx, void *win, t_vec vec1, t_vec vec2);
-void		  draw_lineV(void *mlx, void *win, t_vec vec1, t_vec vec2);
+void		  draw_line_h(void *mlx, void *win, t_vec vec1, t_vec vec2);
+void		  draw_line_v(void *mlx, void *win, t_vec vec1, t_vec vec2);
 t_abs		  get_coord(int x, int y, int z);
 char		  *ft_substrc(char const *s, unsigned int start, size_t len);
 int			  *data_push(char *file, int elem);
