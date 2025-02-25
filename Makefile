@@ -6,7 +6,7 @@
 #    By: hfeufeu <hfeufeu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 20:28:29 by hfeufeu           #+#    #+#              #
-#    Updated: 2025/02/25 14:34:52 by hfeufeu          ###   ########.fr        #
+#    Updated: 2025/02/25 16:00:36 by hfeufeu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ SRC = fdf.c \
 	  points.c \
 	  parsing.c \
 	  parsing_utils.c \
-	  listing.c \
 	  drawer.c \
 	  read_file.c \
 
@@ -57,7 +56,7 @@ $(RED)By Dornagol$(RESET)
 endef
 export HEADER
 
-all: header $(LIBFT) $(EXEC)
+all: header $(LIBFT) $(MLX) $(EXEC)
 
 header:
 	clear
@@ -69,6 +68,9 @@ $(OBJDIR)/%.o: %.c
 
 $(LIBFT):
 	@$(MAKE) -s -C $(LIBFT_DIR)
+
+$(MLX):
+	@$(MAKE) -s -C $(MLX_DIR)
 
 $(EXEC): $(OBJ)
 	@echo "$(GREEN)[Linking] Creating executable $(EXEC)...$(RESET)"
@@ -84,11 +86,13 @@ clean:
 	@echo "$(RED)[Cleaning] Removing object files...$(RESET)"
 	@rm -f -r $(OBJ) $(OBJDIR)
 	@$(MAKE) -s -C $(LIBFT_DIR) clean
+	@$(MAKE) -s -C $(MLX_DIR) clean
 
 fclean: clean
 	@echo "$(RED)[Full cleanup] Removing executable...$(RESET)"
 	@rm -f -r $(EXEC) libmlx.so
 	@$(MAKE) -s -C $(LIBFT_DIR) fclean
+	@$(MAKE) -s -C $(MLX_DIR) fclean
 
 re: fclean all
 	@echo "$(GREEN)[Rebuilding] Everything is recompiled!$(RESET)"
