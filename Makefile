@@ -6,7 +6,7 @@
 #    By: hfeufeu <hfeufeu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 20:28:29 by hfeufeu           #+#    #+#              #
-#    Updated: 2025/02/24 18:48:18 by hfeufeu          ###   ########.fr        #
+#    Updated: 2025/02/25 14:34:52 by hfeufeu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,10 @@ SRC = fdf.c \
 	  fdf_utils.c \
 	  points.c \
 	  parsing.c \
+	  parsing_utils.c \
 	  listing.c \
 	  drawer.c \
+	  read_file.c \
 
 SRC := $(addprefix $(SRCDIR)/, $(SRC))
 
